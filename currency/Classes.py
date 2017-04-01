@@ -1,5 +1,5 @@
 class Currency:
-	def __init__(self, name, abbreviation):
+    def __init__(self, name, abbreviation):
         self.name = name
         self.abb = abbreviation
         self.last_values = []
