@@ -17,20 +17,32 @@
             text: 'Cotação de moedas com base no dólar (USD)'
         },
         xAxis: {
-            categories: '{{name}}'
+            title: "Datas",
+            categories: [
+            {% for date in dates %}
+            '{{date}}',
+            {% endfor%}
+            ]
         },
         yAxis: {
-            title: {
-                text: 'Valor'
-            }
+            title: "Valor",
         },
-        series: [{
-            name: '{{name}}',
-            data: {{quotes}}
-        }]
+        series: [
+        {
+            name: '{{currency.name}}',
+            data: {{currency.last_values}}
+        },
+        ]
     });
 });
 </script>
     
+<div class="row">
+    <form action="/" method="post">
+        <button name="currency" value="Euro/EUR" type="submit">Euro</button>
+        <button name="currency" value="Real/BRL" type="submit">Real</button>
+        <button name="currency" value="Peso Argentino/ARS" type="submit">Peso Argentino</button>
+    </form>
+</div>
 </body>
 </html>
