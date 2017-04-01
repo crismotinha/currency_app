@@ -6,4 +6,3 @@ class Currency:
 
     def add_value(self, value):
         self.last_values.append(value)
-        

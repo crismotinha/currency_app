@@ -1,5 +1,6 @@
 from flask import Flask
 import os
+from datetime import datetime
 import requests
 from classes import Currency
 import helpers
@@ -14,7 +15,7 @@ url = 'http://www.apilayer.net/api/historical'
 
 def get_quote(currency):
     req_params["currencies"] = currency.abb
-    week = helpers.get_last_week()
+    week = helpers.get_last_week(datetime.today())
     for day in week:
         req_params["date"] = day
         r = requests.get(url, params = req_params)
