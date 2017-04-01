@@ -1,11 +1,8 @@
-from flask import Flask
 import os
 from datetime import datetime
 import requests
-from classes import Currency
-import helpers
+from currency import helpers
 
-app = Flask(__name__)
 
 currency_api_key = os.environ.get('CURRENCY_API_KEY')
 
@@ -21,9 +18,3 @@ def get_quote(currency):
         r = requests.get(url, params = req_params)
         currency.add_value(r.json()["quotes"]["USD"+currency.abb])
     return currency
-
-
-if __name__ == "__main__":
-    coin = Currency("teste", "AMD")
-    get_quote(coin)
-
