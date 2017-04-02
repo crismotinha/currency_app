@@ -16,5 +16,8 @@ def get_quote(currency):
     for day in week:
         req_params["date"] = day
         r = requests.get(url, params = req_params)
-        currency.add_value(r.json()["quotes"]["USD"+currency.abb])
+        if r.json()["success"]:
+            currency.add_value(r.json()["quotes"]["USD"+currency.abb])
+        else:
+            currency.add_value(None)
     return currency
