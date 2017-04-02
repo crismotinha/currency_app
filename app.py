@@ -14,9 +14,11 @@ def return_graphic():
     selected_currency = routes.get_quote(selected_currency)
 
     dates = helpers.get_last_week(datetime.today()) #pega a data dos últimos 7 dias
-    
-    return render_template('index.html', 
-        dates = dates, currency = selected_currency)
+
+    if None in selected_currency.last_values:
+        return render_template('error.html')
+    else:
+        return render_template('graphic.html', dates = dates, currency = selected_currency)
 
 @app.route('/', methods=['GET'])
 def return_default():
@@ -26,8 +28,10 @@ def return_default():
     
     dates = helpers.get_last_week(datetime.today())
     
-    return render_template('index.html', 
-        dates = dates, currency = selected_currency)
+    if None in selected_currency.last_values:
+        return render_template('error.html')
+    else:
+        return render_template('graphic.html', dates = dates, currency = selected_currency)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
