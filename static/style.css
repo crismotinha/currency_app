@@ -1,0 +1,15 @@
+.button {
+    margin: 0 2% 0 2%;
+    width: 100%;
+}
+
+.container {
+    background: url("background.jpg");
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+.row {
+    background: none;
+    margin: 5% 0 5% 0;
+}

@@ -3,46 +3,71 @@
 <head>
     <title>Currency App</title>
     <script src="http://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
     <script src="http://code.highcharts.com/highcharts.js"></script>
 </head>
 <body>
-<div id="container" style="width:100%; height:400px;"></div>
-<script type="text/javascript">
-    $(function () { 
-    var myChart = Highcharts.chart('container', {
-        chart: {
-            type: 'line'
-        },
-        title: {
-            text: 'Cotação de moedas com base no dólar (USD)'
-        },
-        xAxis: {
-            title: "Datas",
-            categories: [
-            {% for date in dates %}
-            '{{date}}',
-            {% endfor%}
+    <script type="text/javascript">
+        $(function () { 
+        var myChart = Highcharts.chart('container', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Cotação de moedas com base no dólar (USD)'
+            },
+            xAxis: {
+                title: "Datas",
+                categories: [
+                {% for date in dates %}
+                '{{date}}',
+                {% endfor%}
+                ]
+            },
+            yAxis: {
+                title: "Valor",
+            },
+            series: [
+            {
+                name: '{{currency.name}}',
+                data: {{currency.last_values}}
+            },
             ]
-        },
-        yAxis: {
-            title: "Valor",
-        },
-        series: [
-        {
-            name: '{{currency.name}}',
-            data: {{currency.last_values}}
-        },
-        ]
+        });
     });
-});
-</script>
-    
-<div class="row">
-    <form action="/" method="post">
-        <button name="currency" value="Euro/EUR" type="submit">Euro</button>
-        <button name="currency" value="Real/BRL" type="submit">Real</button>
-        <button name="currency" value="Peso Argentino/ARS" type="submit">Peso Argentino</button>
-    </form>
-</div>
+    </script>
+
+    <div class="container">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <p class="navbar-text navbar-right">Made by <a href="http://github.com/crismotinha" class="navbar-link">Cris Motinha</a></p>
+                    <a class="navbar-brand" href="#">
+                        <span class="glyphicon glyphicon-piggy-bank"></span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <div class="row">       
+            <form action="/" method="post">
+                <div class="col-md-2 col-md-offset-3">
+                    <button class="btn btn-primary button" name="currency" value="Euro/EUR" type="submit">Euro</button>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-success button" name="currency" value="Real/BRL" type="submit">Real</button>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-info button" name="currency" value="Peso Argentino/ARS" type="submit">Peso Argentino</button>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div id="container" style=" margin: 0 auto; width:70%; height:400px;"></div>
+        </div>
+    </div>
 </body>
 </html>
