@@ -5,6 +5,7 @@ import sys
 
 def test_get_quote():
     fake_json = {
+        "success": True,
         "quotes": {
             "USDBRL": "1"
             }
