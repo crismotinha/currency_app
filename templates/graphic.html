@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% block script %}
+  {{ super() }}
+    <script type="text/javascript">
+        $(function () { 
+        var myChart = Highcharts.chart('container', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Cotação de moedas com base no dólar (USD)'
+            },
+            xAxis: {
+                title: "Datas",
+                categories: [
+                {% for date in dates %}
+                '{{date}}',
+                {% endfor%}
+                ]
+            },
+            yAxis: {
+                title: "Valor",
+            },
+            series: [
+            {
+                name: '{{currency.name}}',
+                data: {{currency.last_values}}
+            },
+            ]
+        });
+    });
+    </script>
+{% endblock %}
