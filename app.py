@@ -6,24 +6,23 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def return_graphic():
+    #cria uma instância de Currency com as informações do request feito pelo botão
     selected_name = request.form["currency"].split("/")[0]
     selected_abbreviation = request.form["currency"].split("/")[1]
     selected_currency = classes.Currency(selected_name, selected_abbreviation)
-   
     selected_currency = routes.get_quote(selected_currency)
 
-
-    dates = helpers.get_last_week(datetime.today())
+    dates = helpers.get_last_week(datetime.today()) #pega a data dos últimos 7 dias
     
     return render_template('index.html', 
         dates = dates, currency = selected_currency)
 
 @app.route('/', methods=['GET'])
 def return_default():
+     #cria uma instância de Currency default, para exibição no primeiro carregamento da página
     selected_currency = classes.Currency("Real", "BRL")
     selected_currency = routes.get_quote(selected_currency)
-
-
+    
     dates = helpers.get_last_week(datetime.today())
     
     return render_template('index.html', 
