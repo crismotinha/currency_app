@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+{% block script %}
+  {{ super() }}
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $( "#container" ).append( '<div class="alert alert-danger" role="alert">Houve um problema ao acessar os valores :( Por favor, tente novamente</div>' );
+    })
+    </script>
+{% endblock %}
