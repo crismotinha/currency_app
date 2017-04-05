@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from currency import routes, classes, helpers
+import routes, classes, helpers
 from datetime import datetime
 import os
 
